@@ -68,8 +68,8 @@
   .pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--mint);
     background:rgba(233,198,124,.10);border:1px solid rgba(233,198,124,.25);padding:7px 14px;border-radius:999px}
   .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint)}
-  h1{font-size:46px;line-height:1.18;letter-spacing:-.01em;margin:20px 0 16px;font-weight:800}
-  .lead{font-size:17px;color:var(--mut);max-width:30em}
+  h1{font-size:46px;line-height:1.18;letter-spacing:-.01em;margin:20px 0 16px;font-weight:800;text-wrap:balance}
+  .lead{font-size:17px;color:var(--mut);max-width:30em;text-wrap:pretty}
   .hero-cta{display:flex;gap:13px;flex-wrap:wrap;margin-top:28px}
   .hero-note{margin-top:16px;font-size:12.5px;color:var(--dim)}
   @media(max-width:880px){.hero{grid-template-columns:1fr;padding:52px 0 36px;text-align:center}
@@ -95,7 +95,7 @@
   .scr-card{margin:14px 14px 0;background:rgba(255,255,255,.05);border:1px solid var(--line);
     border-radius:14px;padding:12px 13px}
   .scr-card .lbl{font-size:9.5px;color:var(--mint);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-  .scr-card p{font-size:11.5px;color:#cfe0f2;margin-top:6px;line-height:1.5}
+  .scr-card p{font-size:11.5px;color:#cfe0f2;margin-top:6px;line-height:1.5;text-wrap:pretty}
   .chip{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:#2A1E05;font-weight:700;
     background:var(--mint);padding:4px 9px;border-radius:999px;margin-top:10px}
 
@@ -112,8 +112,8 @@
   section{padding:62px 0}
   .sec-head{text-align:center;max-width:36em;margin:0 auto 40px}
   .sec-head .k{color:var(--mint);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
-  .sec-head h2{font-size:32px;font-weight:800;letter-spacing:-.01em;margin:10px 0 12px}
-  .sec-head p{color:var(--mut);font-size:16px}
+  .sec-head h2{font-size:32px;font-weight:800;letter-spacing:-.01em;margin:10px 0 12px;text-wrap:balance}
+  .sec-head p{color:var(--mut);font-size:16px;text-wrap:pretty}
 
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   @media(max-width:880px){.grid{grid-template-columns:1fr 1fr}}
@@ -123,8 +123,8 @@
   .card:hover{border-color:rgba(233,198,124,.35);transform:translateY(-3px)}
   .card .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;margin-bottom:15px;
     background:rgba(233,198,124,.10);border:1px solid rgba(233,198,124,.20);color:var(--mint)}
-  .card h3{font-size:17px;font-weight:700;margin-bottom:8px}
-  .card p{font-size:14px;color:var(--mut)}
+  .card h3{font-size:17px;font-weight:700;margin-bottom:8px;text-wrap:balance}
+  .card p{font-size:14px;color:var(--mut);text-wrap:pretty}
 
   /* privacy band */
   .band{background:
@@ -156,8 +156,8 @@
 
   /* final cta */
   .final{text-align:center}
-  .final h2{font-size:34px;font-weight:800;letter-spacing:-.01em}
-  .final p{color:var(--mut);margin:12px auto 26px;max-width:30em}
+  .final h2{font-size:34px;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+  .final p{color:var(--mut);margin:12px auto 26px;max-width:30em;text-wrap:pretty}
 
   /* footer */
   footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:10px}
@@ -166,6 +166,7 @@
   .foot-links a{color:var(--mut);font-size:13.5px}
   .foot-links a:hover{color:var(--mint)}
   .foot .cp{font-size:12.5px;color:var(--dim)}
+  @media(max-width:680px){.foot{flex-direction:column;align-items:center;text-align:center;gap:14px}.foot-links{justify-content:center;gap:10px 18px}}
 
   .applogo{width:16px;height:16px}
 </style>
