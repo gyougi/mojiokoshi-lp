@@ -407,16 +407,31 @@ function setLang(l){
   document.querySelectorAll('#lang button').forEach(function(b){
     b.classList.toggle('on', b.getAttribute('data-lang')===l);
   });
-  try{localStorage.setItem('moji.lang',l)}catch(e){}
+}
+// Map a system locale string (e.g. "zh-TW", "en-US") to one of our UI languages.
+function matchLang(code){
+  var n=(code||'').toLowerCase();
+  if(n.indexOf('ja')===0) return 'ja';
+  if(n.indexOf('zh')===0) return (n.indexOf('hant')>-1||n.indexOf('tw')>-1||n.indexOf('hk')>-1||n.indexOf('mo')>-1)?'zhHant':'zh';
+  if(n.indexOf('en')===0) return 'en';
+  return null;
+}
+// Follow the phone's language priority list; first supported match wins, else Japanese.
+function detectLang(){
+  var list=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||'ja'];
+  for(var i=0;i<list.length;i++){ var m=matchLang(list[i]); if(m) return m; }
+  return 'ja';
 }
 document.querySelectorAll('#lang button').forEach(function(b){
-  b.addEventListener('click',function(){setLang(b.getAttribute('data-lang'))});
+  b.addEventListener('click',function(){
+    var l=b.getAttribute('data-lang');
+    setLang(l);
+    try{localStorage.setItem('moji.lang',l)}catch(e){} // remember only an explicit choice
+  });
 });
 (function(){
   var saved; try{saved=localStorage.getItem('moji.lang')}catch(e){}
-  var nav=(navigator.language||'ja').toLowerCase();
-  var def = saved || (nav.indexOf('zh')===0?((nav.indexOf('hant')>-1||nav.indexOf('tw')>-1||nav.indexOf('hk')>-1)?'zhHant':'zh'):nav.indexOf('en')===0?'en':'ja');
-  setLang(def);
+  setLang(saved||detectLang()); // no manual choice yet → follow system language every visit
 })();
 </script>
 </body>
