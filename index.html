@@ -33,6 +33,7 @@
   a{color:inherit;text-decoration:none}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
   .accent{color:var(--mint)}
+  .nowrap{white-space:nowrap}
   .pro-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;
     color:#2A1E05;background:linear-gradient(135deg,var(--mint),var(--mint2));
     padding:2px 8px;border-radius:999px;vertical-align:middle;margin-left:8px}
@@ -197,7 +198,7 @@
 <header id="top" class="wrap hero">
   <div>
     <span class="pill"><span class="dot"></span><span data-i18n="hero.badge">完全オフライン</span></span>
-    <h1 data-i18n="hero.title">AIで、<span class="accent">オフライン</span>文字起こし。</h1>
+    <h1 data-i18n="hero.title"><span class="nowrap">AIで、</span><wbr><span class="accent nowrap">オフライン</span><wbr><span class="nowrap">文字起こし。</span></h1>
     <p class="lead" data-i18n="hero.lead">録音も動画も、文字起こし・翻訳・AI のすべてが iPhone の中だけで完結。音声がインターネットに送られることは一切ありません。</p>
     <div class="hero-cta" id="download">
       <a class="btn btn-primary" href="https://apps.apple.com/app/id6778388699">
@@ -367,7 +368,7 @@
 <script>
 const I18N={
 ja:{"brand.sub":"文字起こし","nav.features":"機能","nav.privacy":"プライバシー","nav.pricing":"料金","cta.get":"入手","cta.appstore":"App Store でダウンロード","cta.learn":"機能を見る",
-"hero.badge":"完全オフライン","hero.title":"AIで、<span class='accent'>オフライン</span>文字起こし。","hero.lead":"録音も動画も、文字起こし・翻訳・AI のすべてが iPhone の中だけで完結。音声がインターネットに送られることは一切ありません。","hero.note":"iPhone・iOS 18 以降。基本無料（アプリ内課金あり）。",
+"hero.badge":"完全オフライン","hero.title":"<span class='nowrap'>AIで、</span><wbr><span class='accent nowrap'>オフライン</span><wbr><span class='nowrap'>文字起こし。</span>","hero.lead":"録音も動画も、文字起こし・翻訳・AI のすべてが iPhone の中だけで完結。音声がインターネットに送られることは一切ありません。","hero.note":"iPhone・iOS 18 以降。基本無料（アプリ内課金あり）。",
 "mock.title":"録音して文字起こし","mock.sub":"完全オフライン処理","mock.lbl":"文字起こし","mock.text":"明日の会議は10時から、資料は事前に共有しておきます。","mock.chip":"そのまま翻訳",
 "trust.1.t":"音声は端末から出ない","trust.1.s":"サーバーに送信しません","trust.2.t":"電波がなくても","trust.2.s":"機内・地下でも使える","trust.3.t":"広告も解析もなし","trust.3.s":"データ収集ゼロ",
 "feat.k":"Features","feat.h":"話す・撮る・書き起こす、すべて端末で。","feat.p":"録音やビデオから、その場でテキストに。さらに翻訳と AI で、伝わる言葉に。",
