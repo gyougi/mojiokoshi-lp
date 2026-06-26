@@ -15,7 +15,7 @@
     --bg:#0A1018; --bg2:#0E1726; --panel:#121E30; --panel2:#16243A;
     --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.14);
     --ink:#EAF1FB; --mut:#9DB0C6; --dim:#6F829A;
-    --mint:#39E0C4; --mint2:#2BC1B0; --blue:#6E9BD6; --gold:#E7C27A;
+    --mint:#E9C67C; --mint2:#CDA75C; --blue:#6E9BD6; --gold:#E7C27A;
     --radius:18px; --max:1080px;
     --font:"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Hiragino Sans","PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;
   }
@@ -25,7 +25,7 @@
     font-family:var(--font); color:var(--ink); background:var(--bg);
     line-height:1.7; -webkit-font-smoothing:antialiased;
     background:
-      radial-gradient(900px 500px at 80% -8%, rgba(57,224,196,.10), transparent 60%),
+      radial-gradient(900px 500px at 80% -8%, rgba(233,198,124,.10), transparent 60%),
       radial-gradient(800px 600px at -5% 12%, rgba(110,155,214,.10), transparent 55%),
       linear-gradient(180deg,#0A1018 0%, #0B1320 40%, #0A1018 100%);
     background-repeat:no-repeat;
@@ -34,7 +34,7 @@
   .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
   .accent{color:var(--mint)}
   .pro-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;
-    color:#08251F;background:linear-gradient(135deg,var(--mint),var(--mint2));
+    color:#2A1E05;background:linear-gradient(135deg,var(--mint),var(--mint2));
     padding:2px 8px;border-radius:999px;vertical-align:middle;margin-left:8px}
 
   /* nav */
@@ -52,12 +52,12 @@
   .lang{display:flex;border:1px solid var(--line2);border-radius:999px;overflow:hidden}
   .lang button{background:none;border:0;color:var(--mut);font:inherit;font-size:13px;font-weight:600;
     padding:6px 11px;cursor:pointer;transition:.15s}
-  .lang button.on{background:var(--mint);color:#062019}
+  .lang button.on{background:var(--mint);color:#2A1E05}
   .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:14px;
     padding:11px 18px;border-radius:12px;cursor:pointer;transition:.18s;border:1px solid transparent;white-space:nowrap}
-  .btn-primary{background:linear-gradient(135deg,var(--mint),var(--mint2));color:#062019;
-    box-shadow:0 8px 26px rgba(57,224,196,.28)}
-  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 12px 32px rgba(57,224,196,.38)}
+  .btn-primary{background:linear-gradient(135deg,var(--mint),var(--mint2));color:#2A1E05;
+    box-shadow:0 8px 26px rgba(233,198,124,.28)}
+  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 12px 32px rgba(233,198,124,.38)}
   .btn-ghost{background:rgba(255,255,255,.04);border-color:var(--line2);color:var(--ink)}
   .btn-ghost:hover{background:rgba(255,255,255,.08)}
   .nav-cta{padding:8px 15px}
@@ -66,7 +66,7 @@
   /* hero */
   .hero{padding:78px 0 56px;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
   .pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--mint);
-    background:rgba(57,224,196,.10);border:1px solid rgba(57,224,196,.25);padding:7px 14px;border-radius:999px}
+    background:rgba(233,198,124,.10);border:1px solid rgba(233,198,124,.25);padding:7px 14px;border-radius:999px}
   .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint)}
   h1{font-size:46px;line-height:1.18;letter-spacing:-.01em;margin:20px 0 16px;font-weight:800}
   .lead{font-size:17px;color:var(--mut);max-width:30em}
@@ -86,17 +86,17 @@
     background:#05090f;border-radius:0 0 14px 14px;z-index:3}
   .scr-top{padding:34px 18px 10px;text-align:center}
   .scr-ico{width:60px;height:60px;border-radius:16px;margin:0 auto 12px;display:grid;place-items:center;
-    background:linear-gradient(155deg,#1c3a5a,#0e2740);box-shadow:0 0 28px rgba(57,224,196,.25)}
+    background:linear-gradient(155deg,#1c3a5a,#0e2740);box-shadow:0 0 28px rgba(233,198,124,.25)}
   .scr-title{font-size:15px;font-weight:700}
   .scr-sub{font-size:11px;color:var(--dim);margin-top:3px}
   .wave{display:flex;align-items:flex-end;justify-content:center;gap:3px;height:34px;margin:16px 0 4px}
-  .wave i{width:3px;border-radius:3px;background:linear-gradient(var(--mint),var(--blue));animation:w 1.3s ease-in-out infinite}
+  .wave i{width:3px;border-radius:3px;background:linear-gradient(var(--mint),var(--mint2));animation:w 1.3s ease-in-out infinite}
   @keyframes w{0%,100%{height:18%}50%{height:100%}}
   .scr-card{margin:14px 14px 0;background:rgba(255,255,255,.05);border:1px solid var(--line);
     border-radius:14px;padding:12px 13px}
   .scr-card .lbl{font-size:9.5px;color:var(--mint);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
   .scr-card p{font-size:11.5px;color:#cfe0f2;margin-top:6px;line-height:1.5}
-  .chip{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:#062019;font-weight:700;
+  .chip{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:#2A1E05;font-weight:700;
     background:var(--mint);padding:4px 9px;border-radius:999px;margin-top:10px}
 
   /* trust strip */
@@ -120,15 +120,15 @@
   @media(max-width:560px){.grid{grid-template-columns:1fr}}
   .card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);
     border-radius:var(--radius);padding:24px 22px;transition:.2s}
-  .card:hover{border-color:rgba(57,224,196,.35);transform:translateY(-3px)}
+  .card:hover{border-color:rgba(233,198,124,.35);transform:translateY(-3px)}
   .card .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;margin-bottom:15px;
-    background:rgba(57,224,196,.10);border:1px solid rgba(57,224,196,.20);color:var(--mint)}
+    background:rgba(233,198,124,.10);border:1px solid rgba(233,198,124,.20);color:var(--mint)}
   .card h3{font-size:17px;font-weight:700;margin-bottom:8px}
   .card p{font-size:14px;color:var(--mut)}
 
   /* privacy band */
   .band{background:
-      radial-gradient(600px 300px at 50% 0%, rgba(57,224,196,.10), transparent 60%),
+      radial-gradient(600px 300px at 50% 0%, rgba(233,198,124,.10), transparent 60%),
       linear-gradient(180deg,#0c1726,#0a1219);
     border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .band .ck{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 30px;max-width:680px;margin:28px auto 0}
@@ -143,7 +143,7 @@
   @media(max-width:680px){.plans{grid-template-columns:1fr}}
   .plan{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);
     border-radius:20px;padding:28px 26px;position:relative}
-  .plan.pro{border-color:rgba(57,224,196,.40);box-shadow:0 0 0 1px rgba(57,224,196,.18),0 20px 50px rgba(0,0,0,.4)}
+  .plan.pro{border-color:rgba(233,198,124,.40);box-shadow:0 0 0 1px rgba(233,198,124,.18),0 20px 50px rgba(0,0,0,.4)}
   .plan .name{font-size:15px;font-weight:700;letter-spacing:.02em}
   .plan .price{font-size:34px;font-weight:800;margin:10px 0 2px}
   .plan .price small{font-size:14px;font-weight:600;color:var(--dim)}
@@ -151,7 +151,7 @@
   .plan ul{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:11px}
   .plan li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--mut)}
   .plan li svg{flex:none;color:var(--mint);margin-top:3px}
-  .badge-best{position:absolute;top:-11px;right:22px;font-size:11px;font-weight:700;color:#062019;
+  .badge-best{position:absolute;top:-11px;right:22px;font-size:11px;font-weight:700;color:#2A1E05;
     background:linear-gradient(135deg,var(--mint),var(--mint2));padding:4px 11px;border-radius:999px}
 
   /* final cta */
@@ -211,7 +211,7 @@
       <div class="screen">
         <div class="notch"></div>
         <div class="scr-top">
-          <div class="scr-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 14v-3M9 17V7M12 20V4M15 17V7M19 14v-3" stroke="#39E0C4" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div class="scr-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 14v-3M9 17V7M12 20V4M15 17V7M19 14v-3" stroke="#E9C67C" stroke-width="2" stroke-linecap="round"/></svg></div>
           <div class="scr-title" data-i18n="mock.title">録音して文字起こし</div>
           <div class="scr-sub" data-i18n="mock.sub">完全オフライン処理</div>
           <div class="wave">
