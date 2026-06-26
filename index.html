@@ -423,16 +423,10 @@ function detectLang(){
   return 'ja';
 }
 document.querySelectorAll('#lang button').forEach(function(b){
-  b.addEventListener('click',function(){
-    var l=b.getAttribute('data-lang');
-    setLang(l);
-    try{localStorage.setItem('moji.lang',l)}catch(e){} // remember only an explicit choice
-  });
+  // Buttons switch the view for the current session only; the choice is never remembered.
+  b.addEventListener('click',function(){ setLang(b.getAttribute('data-lang')); });
 });
-(function(){
-  var saved; try{saved=localStorage.getItem('moji.lang')}catch(e){}
-  setLang(saved||detectLang()); // no manual choice yet → follow system language every visit
-})();
+(function(){ setLang(detectLang()); })(); // always follow the system language on every visit
 </script>
 </body>
 </html>
