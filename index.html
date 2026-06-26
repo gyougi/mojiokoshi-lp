@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mojiokoshi 文字起こし — AIでオフライン文字起こし</title>
+<meta name="description" content="録音も動画も、文字起こし・翻訳・AIのすべてが iPhone の中だけで完結。音声は端末から出ません。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon-64.png">
+<link rel="apple-touch-icon" href="icon-256.png">
+<style>
+  :root{
+    --bg:#0A1018; --bg2:#0E1726; --panel:#121E30; --panel2:#16243A;
+    --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.14);
+    --ink:#EAF1FB; --mut:#9DB0C6; --dim:#6F829A;
+    --mint:#39E0C4; --mint2:#2BC1B0; --blue:#6E9BD6; --gold:#E7C27A;
+    --radius:18px; --max:1080px;
+    --font:"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Hiragino Sans","PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font); color:var(--ink); background:var(--bg);
+    line-height:1.7; -webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(900px 500px at 80% -8%, rgba(57,224,196,.10), transparent 60%),
+      radial-gradient(800px 600px at -5% 12%, rgba(110,155,214,.10), transparent 55%),
+      linear-gradient(180deg,#0A1018 0%, #0B1320 40%, #0A1018 100%);
+    background-repeat:no-repeat;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+  .accent{color:var(--mint)}
+  .pro-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;
+    color:#08251F;background:linear-gradient(135deg,var(--mint),var(--mint2));
+    padding:2px 8px;border-radius:999px;vertical-align:middle;margin-left:8px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
+    background:rgba(10,16,24,.72);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;gap:18px;height:64px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.01em}
+  .brand .ico{width:34px;height:34px;border-radius:9px;flex:none;object-fit:cover;
+    border:1px solid rgba(255,255,255,.10);box-shadow:0 4px 16px rgba(0,0,0,.35)}
+  .brand small{display:block;font-size:11px;font-weight:500;color:var(--dim);letter-spacing:.02em}
+  .nav-links{display:flex;gap:24px;margin-left:14px}
+  .nav-links a{color:var(--mut);font-size:14px;font-weight:500}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:14px}
+  .lang{display:flex;border:1px solid var(--line2);border-radius:999px;overflow:hidden}
+  .lang button{background:none;border:0;color:var(--mut);font:inherit;font-size:13px;font-weight:600;
+    padding:6px 11px;cursor:pointer;transition:.15s}
+  .lang button.on{background:var(--mint);color:#062019}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:14px;
+    padding:11px 18px;border-radius:12px;cursor:pointer;transition:.18s;border:1px solid transparent;white-space:nowrap}
+  .btn-primary{background:linear-gradient(135deg,var(--mint),var(--mint2));color:#062019;
+    box-shadow:0 8px 26px rgba(57,224,196,.28)}
+  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 12px 32px rgba(57,224,196,.38)}
+  .btn-ghost{background:rgba(255,255,255,.04);border-color:var(--line2);color:var(--ink)}
+  .btn-ghost:hover{background:rgba(255,255,255,.08)}
+  .nav-cta{padding:8px 15px}
+  @media(max-width:760px){.nav-links{display:none}.brand small{display:none}}
+
+  /* hero */
+  .hero{padding:78px 0 56px;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+  .pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--mint);
+    background:rgba(57,224,196,.10);border:1px solid rgba(57,224,196,.25);padding:7px 14px;border-radius:999px}
+  .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint)}
+  h1{font-size:46px;line-height:1.18;letter-spacing:-.01em;margin:20px 0 16px;font-weight:800}
+  .lead{font-size:17px;color:var(--mut);max-width:30em}
+  .hero-cta{display:flex;gap:13px;flex-wrap:wrap;margin-top:28px}
+  .hero-note{margin-top:16px;font-size:12.5px;color:var(--dim)}
+  @media(max-width:880px){.hero{grid-template-columns:1fr;padding:52px 0 36px;text-align:center}
+    h1{font-size:36px}.lead{margin-inline:auto}.hero-cta{justify-content:center}.hero-art{order:-1}}
+
+  /* phone mock */
+  .hero-art{display:flex;justify-content:center}
+  .phone{width:268px;height:548px;border-radius:42px;padding:13px;flex:none;
+    background:linear-gradient(160deg,#1b2a40,#0c1726);border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 40px 90px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.03) inset;position:relative}
+  .screen{width:100%;height:100%;border-radius:31px;overflow:hidden;position:relative;
+    background:linear-gradient(180deg,#0c1828,#0a1320);display:flex;flex-direction:column}
+  .notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:96px;height:20px;
+    background:#05090f;border-radius:0 0 14px 14px;z-index:3}
+  .scr-top{padding:34px 18px 10px;text-align:center}
+  .scr-ico{width:60px;height:60px;border-radius:16px;margin:0 auto 12px;display:grid;place-items:center;
+    background:linear-gradient(155deg,#1c3a5a,#0e2740);box-shadow:0 0 28px rgba(57,224,196,.25)}
+  .scr-title{font-size:15px;font-weight:700}
+  .scr-sub{font-size:11px;color:var(--dim);margin-top:3px}
+  .wave{display:flex;align-items:flex-end;justify-content:center;gap:3px;height:34px;margin:16px 0 4px}
+  .wave i{width:3px;border-radius:3px;background:linear-gradient(var(--mint),var(--blue));animation:w 1.3s ease-in-out infinite}
+  @keyframes w{0%,100%{height:18%}50%{height:100%}}
+  .scr-card{margin:14px 14px 0;background:rgba(255,255,255,.05);border:1px solid var(--line);
+    border-radius:14px;padding:12px 13px}
+  .scr-card .lbl{font-size:9.5px;color:var(--mint);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+  .scr-card p{font-size:11.5px;color:#cfe0f2;margin-top:6px;line-height:1.5}
+  .chip{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:#062019;font-weight:700;
+    background:var(--mint);padding:4px 9px;border-radius:999px;margin-top:10px}
+
+  /* trust strip */
+  .strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:8px 0 4px}
+  .strip .it{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.03);
+    border:1px solid var(--line);border-radius:14px;padding:15px 16px}
+  .strip svg{flex:none;color:var(--mint)}
+  .strip b{font-size:14px;font-weight:600;display:block}
+  .strip span{font-size:12px;color:var(--dim)}
+  @media(max-width:760px){.strip{grid-template-columns:1fr}}
+
+  /* sections */
+  section{padding:62px 0}
+  .sec-head{text-align:center;max-width:36em;margin:0 auto 40px}
+  .sec-head .k{color:var(--mint);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+  .sec-head h2{font-size:32px;font-weight:800;letter-spacing:-.01em;margin:10px 0 12px}
+  .sec-head p{color:var(--mut);font-size:16px}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:880px){.grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  .card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);
+    border-radius:var(--radius);padding:24px 22px;transition:.2s}
+  .card:hover{border-color:rgba(57,224,196,.35);transform:translateY(-3px)}
+  .card .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;margin-bottom:15px;
+    background:rgba(57,224,196,.10);border:1px solid rgba(57,224,196,.20);color:var(--mint)}
+  .card h3{font-size:17px;font-weight:700;margin-bottom:8px}
+  .card p{font-size:14px;color:var(--mut)}
+
+  /* privacy band */
+  .band{background:
+      radial-gradient(600px 300px at 50% 0%, rgba(57,224,196,.10), transparent 60%),
+      linear-gradient(180deg,#0c1726,#0a1219);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .band .ck{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 30px;max-width:680px;margin:28px auto 0}
+  .ck .row{display:flex;gap:12px;align-items:flex-start}
+  .ck .row svg{flex:none;color:var(--mint);margin-top:2px}
+  .ck b{font-weight:600;font-size:15px}
+  .ck small{display:block;color:var(--dim);font-size:13px;font-weight:400}
+  @media(max-width:620px){.band .ck{grid-template-columns:1fr}}
+
+  /* pricing */
+  .plans{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:760px;margin:0 auto}
+  @media(max-width:680px){.plans{grid-template-columns:1fr}}
+  .plan{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);
+    border-radius:20px;padding:28px 26px;position:relative}
+  .plan.pro{border-color:rgba(57,224,196,.40);box-shadow:0 0 0 1px rgba(57,224,196,.18),0 20px 50px rgba(0,0,0,.4)}
+  .plan .name{font-size:15px;font-weight:700;letter-spacing:.02em}
+  .plan .price{font-size:34px;font-weight:800;margin:10px 0 2px}
+  .plan .price small{font-size:14px;font-weight:600;color:var(--dim)}
+  .plan .yr{font-size:13px;color:var(--mint);font-weight:600;margin-bottom:16px}
+  .plan ul{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:11px}
+  .plan li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--mut)}
+  .plan li svg{flex:none;color:var(--mint);margin-top:3px}
+  .badge-best{position:absolute;top:-11px;right:22px;font-size:11px;font-weight:700;color:#062019;
+    background:linear-gradient(135deg,var(--mint),var(--mint2));padding:4px 11px;border-radius:999px}
+
+  /* final cta */
+  .final{text-align:center}
+  .final h2{font-size:34px;font-weight:800;letter-spacing:-.01em}
+  .final p{color:var(--mut);margin:12px auto 26px;max-width:30em}
+
+  /* footer */
+  footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:10px}
+  .foot{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
+  .foot-links{display:flex;gap:22px;flex-wrap:wrap}
+  .foot-links a{color:var(--mut);font-size:13.5px}
+  .foot-links a:hover{color:var(--mint)}
+  .foot .cp{font-size:12.5px;color:var(--dim)}
+
+  .applogo{width:16px;height:16px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">
+      <img class="ico" src="icon-256.png" alt="Mojiokoshi" width="34" height="34">
+      <span>Mojiokoshi<small data-i18n="brand.sub">文字起こし</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="#features" data-i18n="nav.features">機能</a>
+      <a href="#privacy" data-i18n="nav.privacy">プライバシー</a>
+      <a href="#pricing" data-i18n="nav.pricing">料金</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang" id="lang">
+        <button data-lang="ja">日</button><button data-lang="en">EN</button><button data-lang="zh">中</button>
+      </div>
+      <a class="btn btn-primary nav-cta" href="#download"><span data-i18n="cta.get">入手</span></a>
+    </div>
+  </div>
+</nav>
+
+<header id="top" class="wrap hero">
+  <div>
+    <span class="pill"><span class="dot"></span><span data-i18n="hero.badge">完全オフライン</span></span>
+    <h1 data-i18n="hero.title">AIで、<span class="accent">オフライン</span>文字起こし。</h1>
+    <p class="lead" data-i18n="hero.lead">録音も動画も、文字起こし・翻訳・AI のすべてが iPhone の中だけで完結。音声がインターネットに送られることは一切ありません。</p>
+    <div class="hero-cta" id="download">
+      <a class="btn btn-primary" href="https://apps.apple.com/jp/app/id6778388699">
+        <svg class="applogo" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268c-.5-52 42.4-77 44.3-78.2-24.2-35.4-61.8-40.2-75.1-40.7-32-3.3-62.4 18.8-78.6 18.8-16.2 0-41.2-18.4-67.8-17.9-34.9.5-67.1 20.3-85 51.6-36.2 62.8-9.3 155.7 26 206.6 17.2 24.9 37.7 52.8 64.6 51.8 25.9-1 35.7-16.7 67-16.7 31.2 0 40.1 16.7 67.5 16.2 27.9-.5 45.5-25.3 62.6-50.3 19.7-28.8 27.8-56.7 28.3-58.1-.6-.3-54.3-20.9-54.8-82.9zM266.9 117.9c14.3-17.3 23.9-41.4 21.3-65.4-20.6.8-45.5 13.7-60.2 31-13.2 15.3-24.8 39.8-21.7 63.3 23 1.8 46.4-11.7 60.6-28.9z"/></svg>
+        <span data-i18n="cta.appstore">App Store でダウンロード</span>
+      </a>
+      <a class="btn btn-ghost" href="#features" data-i18n="cta.learn">機能を見る</a>
+    </div>
+    <p class="hero-note" data-i18n="hero.note">iPhone・iOS 18 以降。基本無料(アプリ内課金あり)。</p>
+  </div>
+  <div class="hero-art">
+    <div class="phone">
+      <div class="screen">
+        <div class="notch"></div>
+        <div class="scr-top">
+          <div class="scr-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 14v-3M9 17V7M12 20V4M15 17V7M19 14v-3" stroke="#39E0C4" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div class="scr-title" data-i18n="mock.title">録音して文字起こし</div>
+          <div class="scr-sub" data-i18n="mock.sub">完全オフライン処理</div>
+          <div class="wave">
+            <i style="animation-delay:0s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.15s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:.05s"></i><i style="animation-delay:.2s"></i><i style="animation-delay:.35s"></i><i style="animation-delay:.12s"></i><i style="animation-delay:.28s"></i><i style="animation-delay:.08s"></i><i style="animation-delay:.22s"></i>
+          </div>
+        </div>
+        <div class="scr-card">
+          <span class="lbl" data-i18n="mock.lbl">文字起こし</span>
+          <p data-i18n="mock.text">明日の会議は10時から、資料は事前に共有しておきます。</p>
+          <span class="chip">✓ <span data-i18n="mock.chip">そのまま翻訳</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="strip">
+    <div class="it"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2l7 3v6c0 4.5-3 8.3-7 9.5C8 19.3 5 15.5 5 11V5l7-3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b data-i18n="trust.1.t">音声は端末から出ない</b><span data-i18n="trust.1.s">サーバーに送信しません</span></div></div>
+    <div class="it"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M4 12h16M12 3c2.5 2.5 2.5 14 0 18M12 3c-2.5 2.5-2.5 14 0 18" stroke="currentColor" stroke-width="1.5"/></svg><div><b data-i18n="trust.2.t">電波がなくても</b><span data-i18n="trust.2.s">機内・地下でも使える</span></div></div>
+    <div class="it"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" opacity=".25"/><path d="M5 9l3 3-3 3M11 15h8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b data-i18n="trust.3.t">広告も解析もなし</b><span data-i18n="trust.3.s">データ収集ゼロ</span></div></div>
+  </div>
+</div>
+
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k" data-i18n="feat.k">Features</div>
+      <h2 data-i18n="feat.h">話す・撮る・書き起こす、すべて端末で。</h2>
+      <p data-i18n="feat.p">録音やビデオから、その場でテキストに。さらに翻訳と AI で、伝わる言葉に。</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M5 11a7 7 0 0014 0M12 18v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3 data-i18n="f1.t">録音して文字起こし</h3>
+        <p data-i18n="f1.p">マイクで話すだけで、その場でテキストに。会議・取材・メモに。</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M10 9l5 3-5 3V9z" fill="currentColor"/></svg></div>
+        <h3 data-i18n="f2.t">動画から文字起こし</h3>
+        <p data-i18n="f2.p">ライブラリの動画を選ぶだけ。音声を抽出してテキスト化します。</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 6h7M7 4v2c0 4-1.5 7-4 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M5 11c1.5 2.5 3.5 4 6 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M13 20l4-9 4 9M14.5 17h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3 data-i18n="f3.t">結果をそのまま翻訳<span class="pro-tag">Pro</span></h3>
+        <p data-i18n="f3.p">文字起こしの結果を、ワンタップで多言語に翻訳。オンデバイスで完結。</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M18 14l.8 2.2L21 17l-2.2.8L18 20l-.8-2.2L15 17l2.2-.8L18 14z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <h3 data-i18n="f4.t">意図転訳（AIアドバイザー）<span class="pro-tag">Pro</span></h3>
+        <p data-i18n="f4.p">伝えたいことを入力すると、場面に合う自然な言い回しを AI が提案。端末内 AI で動作。</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3 data-i18n="f5.t">履歴と書き出し</h3>
+        <p data-i18n="f5.p">作った文字起こしは履歴に。テキスト（.txt）や字幕（.srt）として書き出し。</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 12h17M12 3.5c2.5 2.6 2.5 14.4 0 17M12 3.5c-2.5 2.6-2.5 14.4 0 17" stroke="currentColor" stroke-width="1.5"/></svg></div>
+        <h3 data-i18n="f6.t">約99言語・7つのテーマ</h3>
+        <p data-i18n="f6.p">日本語・英語・中国語ほか約99言語に対応。7種類のテーマで自分好みに。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="privacy" class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k" data-i18n="priv.k">Privacy by design</div>
+      <h2 data-i18n="priv.h">プライバシーは、設計から。</h2>
+      <p data-i18n="priv.p">サーバーも、解析 SDK も、広告もありません。録音・動画は端末内で処理し、文字起こしは本体にのみ保存します。</p>
+    </div>
+    <div class="ck">
+      <div class="row"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b data-i18n="priv.1.t">音声・動画は端末内で処理</b><small data-i18n="priv.1.s">インターネットに送信されません</small></div></div>
+      <div class="row"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b data-i18n="priv.2.t">解析 SDK・広告なし</b><small data-i18n="priv.2.s">App Privacy は「データ収集なし」</small></div></div>
+      <div class="row"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b data-i18n="priv.3.t">AI も翻訳も端末内</b><small data-i18n="priv.3.s">第三者 AI にデータを送りません</small></div></div>
+      <div class="row"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b data-i18n="priv.4.t">通信はモデルの初回DLのみ</b><small data-i18n="priv.4.s">ユーザーデータは含まれません</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k" data-i18n="price.k">Pricing</div>
+      <h2 data-i18n="price.h">まずは無料で。</h2>
+      <p data-i18n="price.p">基本機能は無料。Pro で時間・回数を無制限にし、翻訳と AI、字幕書き出しを解放。</p>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <div class="name" data-i18n="plan.free.n">無料</div>
+        <div class="price">¥0</div>
+        <div class="yr">&nbsp;</div>
+        <ul>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="plan.free.1">録音・動画の文字起こし</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="plan.free.2">約99言語・自動検出</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="plan.free.3">7つのテーマ</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="plan.free.4">（1日の回数・長さに上限）</span></li>
+        </ul>
+      </div>
+      <div class="plan pro">
+        <div class="badge-best" data-i18n="plan.pro.badge">おすすめ</div>
+        <div class="name accent">Mojiokoshi Pro</div>
+        <div class="price"><span data-i18n="plan.pro.amt">¥680</span><small data-i18n="plan.pro.mo">/月</small></div>
+        <div class="yr" data-i18n="plan.pro.yr">または ¥5,700/年（約30%お得）</div>
+        <ul>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="plan.pro.1">時間・回数 無制限</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="plan.pro.2">オンデバイス翻訳</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="plan.pro.3">意図転訳（AIアドバイザー）</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="plan.pro.4">.txt / .srt 書き出し</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2 data-i18n="final.h">あなたの言葉を、端末の中で。</h2>
+    <p data-i18n="final.p">録音も動画も、その場で文字に。プライバシーは守ったまま。</p>
+    <a class="btn btn-primary" href="https://apps.apple.com/jp/app/id6778388699">
+      <svg class="applogo" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268c-.5-52 42.4-77 44.3-78.2-24.2-35.4-61.8-40.2-75.1-40.7-32-3.3-62.4 18.8-78.6 18.8-16.2 0-41.2-18.4-67.8-17.9-34.9.5-67.1 20.3-85 51.6-36.2 62.8-9.3 155.7 26 206.6 17.2 24.9 37.7 52.8 64.6 51.8 25.9-1 35.7-16.7 67-16.7 31.2 0 40.1 16.7 67.5 16.2 27.9-.5 45.5-25.3 62.6-50.3 19.7-28.8 27.8-56.7 28.3-58.1-.6-.3-54.3-20.9-54.8-82.9zM266.9 117.9c14.3-17.3 23.9-41.4 21.3-65.4-20.6.8-45.5 13.7-60.2 31-13.2 15.3-24.8 39.8-21.7 63.3 23 1.8 46.4-11.7 60.6-28.9z"/></svg>
+      <span data-i18n="cta.appstore">App Store でダウンロード</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div class="foot-links">
+      <a href="https://gyougi.github.io/mojiokoshi-legal/privacy.html" data-i18n="foot.privacy">プライバシーポリシー</a>
+      <a href="https://gyougi.github.io/mojiokoshi-legal/support.html" data-i18n="foot.support">サポート</a>
+      <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" data-i18n="foot.eula">利用規約</a>
+      <a href="https://apps.apple.com/jp/app/id6778388699">App Store</a>
+    </div>
+    <div class="cp" data-i18n="foot.cp">© 2026 GYOU GI. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+const I18N={
+ja:{"brand.sub":"文字起こし","nav.features":"機能","nav.privacy":"プライバシー","nav.pricing":"料金","cta.get":"入手","cta.appstore":"App Store でダウンロード","cta.learn":"機能を見る",
+"hero.badge":"完全オフライン","hero.title":"AIで、<span class='accent'>オフライン</span>文字起こし。","hero.lead":"録音も動画も、文字起こし・翻訳・AI のすべてが iPhone の中だけで完結。音声がインターネットに送られることは一切ありません。","hero.note":"iPhone・iOS 18 以降。基本無料（アプリ内課金あり）。",
+"mock.title":"録音して文字起こし","mock.sub":"完全オフライン処理","mock.lbl":"文字起こし","mock.text":"明日の会議は10時から、資料は事前に共有しておきます。","mock.chip":"そのまま翻訳",
+"trust.1.t":"音声は端末から出ない","trust.1.s":"サーバーに送信しません","trust.2.t":"電波がなくても","trust.2.s":"機内・地下でも使える","trust.3.t":"広告も解析もなし","trust.3.s":"データ収集ゼロ",
+"feat.k":"Features","feat.h":"話す・撮る・書き起こす、すべて端末で。","feat.p":"録音やビデオから、その場でテキストに。さらに翻訳と AI で、伝わる言葉に。",
+"f1.t":"録音して文字起こし","f1.p":"マイクで話すだけで、その場でテキストに。会議・取材・メモに。","f2.t":"動画から文字起こし","f2.p":"ライブラリの動画を選ぶだけ。音声を抽出してテキスト化します。","f3.t":"結果をそのまま翻訳<span class='pro-tag'>Pro</span>","f3.p":"文字起こしの結果を、ワンタップで多言語に翻訳。オンデバイスで完結。","f4.t":"意図転訳（AIアドバイザー）<span class='pro-tag'>Pro</span>","f4.p":"伝えたいことを入力すると、場面に合う自然な言い回しを AI が提案。端末内 AI で動作。","f5.t":"履歴と書き出し","f5.p":"作った文字起こしは履歴に。テキスト（.txt）や字幕（.srt）として書き出し。","f6.t":"約99言語・7つのテーマ","f6.p":"日本語・英語・中国語ほか約99言語に対応。7種類のテーマで自分好みに。",
+"priv.k":"Privacy by design","priv.h":"プライバシーは、設計から。","priv.p":"サーバーも、解析 SDK も、広告もありません。録音・動画は端末内で処理し、文字起こしは本体にのみ保存します。","priv.1.t":"音声・動画は端末内で処理","priv.1.s":"インターネットに送信されません","priv.2.t":"解析 SDK・広告なし","priv.2.s":"App Privacy は「データ収集なし」","priv.3.t":"AI も翻訳も端末内","priv.3.s":"第三者 AI にデータを送りません","priv.4.t":"通信はモデルの初回DLのみ","priv.4.s":"ユーザーデータは含まれません",
+"price.k":"Pricing","price.h":"まずは無料で。","price.p":"基本機能は無料。Pro で時間・回数を無制限にし、翻訳と AI、字幕書き出しを解放。","plan.free.n":"無料","plan.free.1":"録音・動画の文字起こし","plan.free.2":"約99言語・自動検出","plan.free.3":"7つのテーマ","plan.free.4":"（1日の回数・長さに上限）","plan.pro.badge":"おすすめ","plan.pro.amt":"¥680","plan.pro.mo":"/月","plan.pro.yr":"または ¥5,700/年（約30%お得）","plan.pro.1":"時間・回数 無制限","plan.pro.2":"オンデバイス翻訳","plan.pro.3":"意図転訳（AIアドバイザー）","plan.pro.4":".txt / .srt 書き出し",
+"final.h":"あなたの言葉を、端末の中で。","final.p":"録音も動画も、その場で文字に。プライバシーは守ったまま。","foot.privacy":"プライバシーポリシー","foot.support":"サポート","foot.eula":"利用規約","foot.cp":"© 2026 GYOU GI. All rights reserved."},
+en:{"brand.sub":"Voice to Text","nav.features":"Features","nav.privacy":"Privacy","nav.pricing":"Pricing","cta.get":"Get","cta.appstore":"Download on the App Store","cta.learn":"See features",
+"hero.badge":"Fully on-device","hero.title":"AI transcription,<br><span class='accent'>fully offline</span>.","hero.lead":"Recording, video, transcription, translation, and AI — all run entirely on your iPhone. Your audio never leaves the device.","hero.note":"iPhone · iOS 18+. Free to start (in-app purchases).",
+"mock.title":"Record & transcribe","mock.sub":"Fully on-device","mock.lbl":"Transcript","mock.text":"Tomorrow's meeting starts at 10; I'll share the materials in advance.","mock.chip":"Translate",
+"trust.1.t":"Audio stays on device","trust.1.s":"Never sent to a server","trust.2.t":"Works offline","trust.2.s":"On planes, underground","trust.3.t":"No ads, no analytics","trust.3.s":"Zero data collection",
+"feat.k":"Features","feat.h":"Speak, film, transcribe — all on device.","feat.p":"Turn recordings and videos into text on the spot. Then translate and refine with AI.",
+"f1.t":"Record & transcribe","f1.p":"Just speak into the mic and get text on the spot — meetings, interviews, memos.","f2.t":"Transcribe from video","f2.p":"Pick a video from your library; the audio is extracted and turned into text.","f3.t":"Translate the result<span class='pro-tag'>Pro</span>","f3.p":"Translate your transcript into other languages with one tap — fully on-device.","f4.t":"AI Advisor (意図転訳)<span class='pro-tag'>Pro</span>","f4.p":"Type what you want to say; on-device AI suggests natural phrasings for the situation.","f5.t":"History & export","f5.p":"All transcripts saved in History. Export as text (.txt) or subtitles (.srt).","f6.t":"~99 languages · 7 themes","f6.p":"Japanese, English, Chinese and ~99 languages. 7 themes to make it yours.",
+"priv.k":"Privacy by design","priv.h":"Privacy, by design.","priv.p":"No servers, no analytics SDKs, no ads. Recordings and videos are processed on-device, and transcripts are stored only on your phone.","priv.1.t":"Audio & video processed on-device","priv.1.s":"Never sent over the internet","priv.2.t":"No analytics SDK, no ads","priv.2.s":"App Privacy: Data Not Collected","priv.3.t":"AI & translation on-device","priv.3.s":"No data sent to third-party AI","priv.4.t":"Network = one-time model download","priv.4.s":"Contains no user data",
+"price.k":"Pricing","price.h":"Start for free.","price.p":"Core features are free. Pro unlocks unlimited use, translation, AI, and subtitle export.","plan.free.n":"Free","plan.free.1":"Record & video transcription","plan.free.2":"~99 languages, auto-detect","plan.free.3":"7 themes","plan.free.4":"(Daily count & length limits)","plan.pro.badge":"Best value","plan.pro.amt":"¥680","plan.pro.mo":"/mo","plan.pro.yr":"or ¥5,700/year (~30% off)","plan.pro.1":"Unlimited time & count","plan.pro.2":"On-device translation","plan.pro.3":"AI Advisor (意図転訳)","plan.pro.4":".txt / .srt export",
+"final.h":"Your words, kept on your device.","final.p":"Recordings and videos to text on the spot — with privacy intact.","foot.privacy":"Privacy Policy","foot.support":"Support","foot.eula":"Terms of Use","foot.cp":"© 2026 GYOU GI. All rights reserved."},
+zh:{"brand.sub":"语音转文字","nav.features":"功能","nav.privacy":"隐私","nav.pricing":"价格","cta.get":"获取","cta.appstore":"在 App Store 下载","cta.learn":"查看功能",
+"hero.badge":"完全离线","hero.title":"AI 离线<span class='accent'>语音转文字</span>。","hero.lead":"录音、视频、转写、翻译、AI，全部只在 iPhone 内完成。音频绝不上传到互联网。","hero.note":"iPhone · iOS 18 以上。基础免费（含应用内购买）。",
+"mock.title":"录音转文字","mock.sub":"完全离线处理","mock.lbl":"转写结果","mock.text":"明天的会议十点开始，资料我会提前共享。","mock.chip":"一键翻译",
+"trust.1.t":"音频不离开设备","trust.1.s":"绝不上传服务器","trust.2.t":"没信号也能用","trust.2.s":"飞机上、地下都行","trust.3.t":"无广告无分析","trust.3.s":"零数据收集",
+"feat.k":"功能","feat.h":"说话、拍摄、转写，全在端内。","feat.p":"录音或视频，当场变文字；再用翻译和 AI，说出贴切的话。",
+"f1.t":"录音转文字","f1.p":"对着麦克风说话，当场变文字。会议、采访、备忘都行。","f2.t":"视频转文字","f2.p":"选择相册里的视频，自动提取音频并转成文字。","f3.t":"结果一键翻译<span class='pro-tag'>Pro</span>","f3.p":"把转写结果一键翻译成多种语言，完全端内完成。","f4.t":"意图转译（AI 顾问）<span class='pro-tag'>Pro</span>","f4.p":"输入你想表达的内容，端内 AI 给出贴合场景的自然说法。","f5.t":"历史与导出","f5.p":"转写记录都在历史里，可导出文本（.txt）或字幕（.srt）。","f6.t":"约99语言 · 7 种主题","f6.p":"支持日语、英语、中文等约 99 种语言。7 种主题随心换。",
+"priv.k":"隐私优先","priv.h":"隐私，从设计开始。","priv.p":"没有服务器、没有分析 SDK、没有广告。录音和视频在端内处理，转写只存在本机。","priv.1.t":"音视频端内处理","priv.1.s":"绝不上传互联网","priv.2.t":"无分析 SDK、无广告","priv.2.s":"App 隐私:不收集数据","priv.3.t":"AI 与翻译均端内","priv.3.s":"不向第三方 AI 发送数据","priv.4.t":"联网仅首次下载模型","priv.4.s":"不含任何用户数据",
+"price.k":"价格","price.h":"先免费试试。","price.p":"基础功能免费。Pro 解除时长与次数限制，并解锁翻译、AI 与字幕导出。","plan.free.n":"免费","plan.free.1":"录音 / 视频转文字","plan.free.2":"约99语言 · 自动识别","plan.free.3":"7 种主题","plan.free.4":"（每日次数与时长有上限）","plan.pro.badge":"推荐","plan.pro.amt":"¥680","plan.pro.mo":"/月","plan.pro.yr":"或 ¥5,700/年（约省 30%）","plan.pro.1":"时长与次数无限制","plan.pro.2":"端内翻译","plan.pro.3":"意图转译（AI 顾问）","plan.pro.4":".txt / .srt 导出",
+"final.h":"你的话语，只留在设备里。","final.p":"录音和视频当场变文字，隐私始终守住。","foot.privacy":"隐私政策","foot.support":"支持","foot.eula":"使用条款","foot.cp":"© 2026 GYOU GI. 保留所有权利。"}
+};
+function setLang(l){
+  document.documentElement.lang = l==='zh'?'zh-Hans':l;
+  var pf={ja:'"Noto Sans JP"',en:'"Noto Sans JP"',zh:'"Noto Sans SC"'}[l];
+  document.documentElement.style.setProperty('--font', pf+',-apple-system,BlinkMacSystemFont,"Hiragino Sans","PingFang SC","Microsoft YaHei","Segoe UI",sans-serif');
+  const d=I18N[l];
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k=el.getAttribute('data-i18n'); if(d[k]!=null) el.innerHTML=d[k];
+  });
+  document.querySelectorAll('#lang button').forEach(function(b){
+    b.classList.toggle('on', b.getAttribute('data-lang')===l);
+  });
+  try{localStorage.setItem('moji.lang',l)}catch(e){}
+}
+document.querySelectorAll('#lang button').forEach(function(b){
+  b.addEventListener('click',function(){setLang(b.getAttribute('data-lang'))});
+});
+(function(){
+  var saved; try{saved=localStorage.getItem('moji.lang')}catch(e){}
+  var nav=(navigator.language||'ja').toLowerCase();
+  var def = saved || (nav.indexOf('zh')===0?'zh':nav.indexOf('en')===0?'en':'ja');
+  setLang(def);
+})();
+</script>
+</body>
+</html>
