@@ -4,23 +4,90 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>プライバシーポリシー / Privacy Policy — Mojiokoshi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon-64.png">
+<link rel="apple-touch-icon" href="icon-256.png">
 <style>
-  :root { color-scheme: light dark; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Segoe UI", Roboto, sans-serif;
-         line-height: 1.75; max-width: 720px; margin: 0 auto; padding: 40px 20px 80px;
-         color: #1c1c1e; background: #fff; }
-  @media (prefers-color-scheme: dark) { body { color: #e6e6e6; background: #121212; } a { color: #4db6ac; } }
-  h1 { font-size: 1.6rem; } h2 { font-size: 1.15rem; margin-top: 2em; }
-  .lang { color: #888; font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; margin-top: 3em; }
-  .updated { color: #888; font-size: .9rem; }
-  a { color: #00897b; }
-  hr { border: none; border-top: 1px solid #8884; margin: 3em 0; }
-  ul { padding-left: 1.2em; }
-  footer { margin-top: 4em; font-size: .85rem; color: #888; }
+  :root{
+    --bg:#0A1018; --panel:#121E30; --panel2:#16243A;
+    --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.14);
+    --ink:#EAF1FB; --mut:#9DB0C6; --dim:#6F829A;
+    --mint:#E9C67C; --mint2:#CDA75C; --blue:#6E9BD6;
+    --radius:18px; --max:760px;
+    --font:"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Hiragino Sans","PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:var(--font); color:var(--ink); line-height:1.8;
+    -webkit-font-smoothing:antialiased; padding:0 20px 72px; min-height:100vh;
+    background:
+      radial-gradient(900px 500px at 82% -8%, rgba(233,198,124,.10), transparent 60%),
+      radial-gradient(800px 600px at -8% 10%, rgba(110,155,214,.10), transparent 55%),
+      linear-gradient(180deg,#0A1018 0%, #0B1320 42%, #0A1018 100%);
+    background-repeat:no-repeat; background-attachment:fixed;
+  }
+  a{color:var(--mint);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  .top{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:12px;
+    height:66px;position:sticky;top:0;z-index:10;
+    background:linear-gradient(180deg, rgba(10,16,24,.86), rgba(10,16,24,0));
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.01em;color:var(--ink)}
+  .brand:hover{text-decoration:none}
+  .brand img{width:32px;height:32px;border-radius:9px;flex:none;object-fit:cover;
+    border:1px solid rgba(255,255,255,.10);box-shadow:0 4px 16px rgba(0,0,0,.35)}
+  .brand small{display:block;font-size:11px;font-weight:500;color:var(--dim);letter-spacing:.02em}
+  .back{margin-left:auto;font-size:13px;font-weight:600;color:var(--mut);
+    background:rgba(255,255,255,.05);border:1px solid var(--line2);
+    padding:8px 14px;border-radius:999px;transition:.2s;white-space:nowrap}
+  .back:hover{background:rgba(255,255,255,.09);color:var(--ink);text-decoration:none}
+
+  .doc{max-width:var(--max);margin:12px auto 0;
+    background:linear-gradient(180deg, rgba(18,30,48,.70), rgba(14,23,38,.70));
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:38px 34px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    box-shadow:0 24px 60px rgba(0,0,0,.34)}
+  h1{font-size:29px;font-weight:800;letter-spacing:-.01em;line-height:1.28;
+    color:var(--ink);text-wrap:balance}
+  .updated{color:var(--dim);font-size:13px;margin-top:6px}
+  h2{font-size:16.5px;font-weight:700;color:var(--mint);margin:28px 0 8px}
+  p{color:var(--mut);margin:12px 0}
+  strong{color:var(--ink);font-weight:600}
+  ul{padding-left:1.2em;margin:12px 0}
+  li{color:var(--mut);margin:7px 0}
+  .email{font-size:1.05rem;color:var(--ink)}
+
+  .lang{display:inline-flex;align-items:center;margin:0 0 14px;
+    font-size:11.5px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;
+    color:var(--mint);background:rgba(233,198,124,.10);
+    border:1px solid rgba(233,198,124,.26);padding:5px 13px;border-radius:999px}
+  hr{border:0;border-top:1px solid var(--line);margin:36px 0 26px}
+
+  footer{max-width:var(--max);margin:24px auto 0;font-size:12.5px;color:var(--dim);text-align:center}
+
+  @media(max-width:560px){
+    .doc{padding:26px 20px}
+    h1{font-size:24px}
+    .brand small{display:none}
+  }
 </style>
 </head>
 <body>
 
+<header class="top">
+  <a class="brand" href="index.html">
+    <img src="icon-256.png" alt="">
+    <span>Mojiokoshi<small>文字起こし</small></span>
+  </a>
+  <a class="back" href="index.html">トップへ ↗</a>
+</header>
+
+<main class="doc">
+
+<p class="lang">日本語</p>
 <h1>プライバシーポリシー</h1>
 <p class="updated">最終更新日：2026年6月17日</p>
 
@@ -181,6 +248,8 @@
 
 <h2>聯絡我們</h2>
 <p>如有疑問，請聯絡 <a href="mailto:support@glspace.co.jp">support@glspace.co.jp</a>。</p>
+
+</main>
 
 <footer>© 2026 GLSPACE 株式会社 — Mojiokoshi</footer>
 
