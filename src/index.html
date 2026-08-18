@@ -1,38 +1,26 @@
 <!DOCTYPE html>
-<!-- 由 build.py 自动生成，请勿直接编辑。
-     改文案 → src/i18n.js，改结构 → src/index.html，然后跑 python3 build.py -->
-
-<html lang="ja" data-lang="ja">
+<html lang="{{HTMLLANG}}" data-lang="{{LANG}}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mojiokoshi 文字起こし — AIでオフライン文字起こし</title>
-<meta name="description" content="録音も動画も、文字起こし・翻訳・AIのすべてが iPhone の中だけで完結。音声は端末から出ません。">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESC}}">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://mojiokoshi.glspace.co.jp/">
-<meta property="og:title" content="Mojiokoshi 文字起こし — AIでオフライン文字起こし">
-<meta property="og:description" content="録音も動画も、文字起こし・翻訳・AIのすべてが iPhone の中だけで完結。音声は端末から出ません。">
+<meta property="og:url" content="{{URL}}">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{OGDESC}}">
 <meta property="og:image" content="https://mojiokoshi.glspace.co.jp/icon-256.png">
 <meta property="og:image:alt" content="Mojiokoshi">
 <meta property="og:site_name" content="Mojiokoshi">
-<meta property="og:locale" content="ja_JP">
-<meta property="og:locale:alternate" content="en_US" />
-<meta property="og:locale:alternate" content="zh_CN" />
-<meta property="og:locale:alternate" content="zh_TW" />
+<meta property="og:locale" content="{{OGLOCALE}}">{{OGALT}}
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mojiokoshi 文字起こし — AIでオフライン文字起こし">
-<meta name="twitter:description" content="録音も動画も、文字起こし・翻訳・AIのすべてが iPhone の中だけで完結。音声は端末から出ません。">
+<meta name="twitter:title" content="{{TITLE}}">
+<meta name="twitter:description" content="{{OGDESC}}">
 <meta name="twitter:image" content="https://mojiokoshi.glspace.co.jp/icon-256.png">
-<link rel="canonical" href="https://mojiokoshi.glspace.co.jp/" />
-<link rel="alternate" hreflang="ja" href="https://mojiokoshi.glspace.co.jp/" />
-<link rel="alternate" hreflang="en" href="https://mojiokoshi.glspace.co.jp/en/" />
-<link rel="alternate" hreflang="zh-Hans" href="https://mojiokoshi.glspace.co.jp/zh/" />
-<link rel="alternate" hreflang="zh-Hant" href="https://mojiokoshi.glspace.co.jp/zh-hant/" />
-<link rel="alternate" hreflang="x-default" href="https://mojiokoshi.glspace.co.jp/" />
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://mojiokoshi.glspace.co.jp/#org","name":"GLSPACE Co., Ltd.","url":"https://mojiokoshi.glspace.co.jp/","email":"support@glspace.co.jp"},{"@type":"WebSite","@id":"https://mojiokoshi.glspace.co.jp/#website","url":"https://mojiokoshi.glspace.co.jp/","name":"Mojiokoshi","inLanguage":"ja","publisher":{"@id":"https://mojiokoshi.glspace.co.jp/#org"}},{"@type":"SoftwareApplication","@id":"https://mojiokoshi.glspace.co.jp/#app","name":"Mojiokoshi","applicationCategory":"ProductivityApplication","operatingSystem":"iOS","description":"録音も動画も、文字起こし・翻訳・AIのすべてが iPhone の中だけで完結。音声は端末から出ません。","url":"https://mojiokoshi.glspace.co.jp/","installUrl":"https://apps.apple.com/app/id6778388699","image":"https://mojiokoshi.glspace.co.jp/icon-256.png","inLanguage":["ja","en","zh-Hans","zh-Hant"],"publisher":{"@id":"https://mojiokoshi.glspace.co.jp/#org"}}]}</script>
+{{HEADEXTRA}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+{{FONTS}}
 <link rel="icon" type="image/png" href="/favicon-64.png">
 <link rel="apple-touch-icon" href="/icon-256.png">
 <style>
@@ -246,18 +234,18 @@ html[lang="zh-Hant"]{--font:"Noto Sans TC","PingFang TC","Noto Sans TC","Microso
     </div>
     <div class="nav-right">
       <div class="lang" id="lang">
-        <a class="on" data-lang="ja" href="/" hreflang="ja">JA</a><a class="" data-lang="en" href="/en/" hreflang="en">EN</a><a class="" data-lang="zh" href="/zh/" hreflang="zh-Hans">SC</a><a class="" data-lang="zhHant" href="/zh-hant/" hreflang="zh-Hant">TC</a>
+        <a class="{{ACT_ja}}" data-lang="ja" href="{{HREF_ja}}" hreflang="{{HL_ja}}">JA</a><a class="{{ACT_en}}" data-lang="en" href="{{HREF_en}}" hreflang="{{HL_en}}">EN</a><a class="{{ACT_zh}}" data-lang="zh" href="{{HREF_zh}}" hreflang="{{HL_zh}}">SC</a><a class="{{ACT_zhHant}}" data-lang="zhHant" href="{{HREF_zhHant}}" hreflang="{{HL_zhHant}}">TC</a>
       </div>
       <div class="lang-dd">
         <button class="lang-dd-btn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="言語 / Language">
-          <span class="lang-dd-cur">日本語</span>
+          <span class="lang-dd-cur">{{LANGNAME}}</span>
           <svg class="lang-dd-ch" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
         </button>
         <div class="lang-dd-menu" role="listbox">
-          <a class="lang-dd-opt" role="option" data-lang="ja" aria-selected="true" href="/" hreflang="ja">日本語<svg class="lang-dd-ck" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></a>
-          <a class="lang-dd-opt" role="option" data-lang="en" aria-selected="false" href="/en/" hreflang="en">English<svg class="lang-dd-ck" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></a>
-          <a class="lang-dd-opt" role="option" data-lang="zh" aria-selected="false" href="/zh/" hreflang="zh-Hans">简体中文<svg class="lang-dd-ck" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></a>
-          <a class="lang-dd-opt" role="option" data-lang="zhHant" aria-selected="false" href="/zh-hant/" hreflang="zh-Hant">繁體中文<svg class="lang-dd-ck" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></a>
+          <a class="lang-dd-opt" role="option" data-lang="ja" aria-selected="{{SEL_ja}}" href="{{HREF_ja}}" hreflang="{{HL_ja}}">日本語<svg class="lang-dd-ck" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></a>
+          <a class="lang-dd-opt" role="option" data-lang="en" aria-selected="{{SEL_en}}" href="{{HREF_en}}" hreflang="{{HL_en}}">English<svg class="lang-dd-ck" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></a>
+          <a class="lang-dd-opt" role="option" data-lang="zh" aria-selected="{{SEL_zh}}" href="{{HREF_zh}}" hreflang="{{HL_zh}}">简体中文<svg class="lang-dd-ck" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></a>
+          <a class="lang-dd-opt" role="option" data-lang="zhHant" aria-selected="{{SEL_zhHant}}" href="{{HREF_zhHant}}" hreflang="{{HL_zhHant}}">繁體中文<svg class="lang-dd-ck" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></a>
         </div>
       </div>
       <a class="btn btn-primary nav-cta" href="https://apps.apple.com/app/id6778388699"><span data-i18n="cta.get">入手</span></a>
@@ -268,7 +256,7 @@ html[lang="zh-Hant"]{--font:"Noto Sans TC","PingFang TC","Noto Sans TC","Microso
 <header id="top" class="wrap hero">
   <div>
     <span class="pill"><span class="dot"></span><span data-i18n="hero.badge">完全オフライン</span></span>
-    <h1 data-i18n="hero.title"><span class='nowrap'>AIで、</span><wbr><span class='accent nowrap'>オフライン</span><wbr><span class='nowrap'>文字起こし。</span></h1>
+    <h1 data-i18n="hero.title"><span class="nowrap">AIで、</span><wbr><span class="accent nowrap">オフライン</span><wbr><span class="nowrap">文字起こし。</span></h1>
     <p class="lead" data-i18n="hero.lead">録音も動画も、文字起こし・翻訳・AI のすべてが iPhone の中だけで完結。音声がインターネットに送られることは一切ありません。</p>
     <div class="hero-cta" id="download">
       <a class="btn btn-primary" href="https://apps.apple.com/app/id6778388699">
@@ -314,7 +302,7 @@ html[lang="zh-Hant"]{--font:"Noto Sans TC","PingFang TC","Noto Sans TC","Microso
     <div class="sec-head">
       <div class="k" data-i18n="feat.k">Features</div>
       <h2 data-i18n="feat.h">話す・撮る・書き起こす、すべて端末で。</h2>
-      <p data-i18n="feat.p">録音やビデオから、その場でテキストに。翻訳・AI要約・議事録まで、すべて端末内で。</p>
+      <p data-i18n="feat.p">録音やビデオから、その場でテキストに。さらに翻訳と AI で、伝わる言葉に。</p>
     </div>
     <div class="grid">
       <div class="card">
@@ -339,17 +327,17 @@ html[lang="zh-Hant"]{--font:"Noto Sans TC","PingFang TC","Noto Sans TC","Microso
       </div>
       <div class="card">
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 6h7M7 4v2c0 4-1.5 7-4 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M5 11c1.5 2.5 3.5 4 6 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M13 20l4-9 4 9M14.5 17h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3 data-i18n="f3.t">結果をそのまま翻訳<span class='pro-tag'>Pro</span></h3>
+        <h3 data-i18n="f3.t">結果をそのまま翻訳<span class="pro-tag">Pro</span></h3>
         <p data-i18n="f3.p">文字起こしの結果を、ワンタップで約20言語に翻訳。言語パックを入れればオフラインでも、すべて端末内で。</p>
       </div>
       <div class="card">
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M18 14l.8 2.2L21 17l-2.2.8L18 20l-.8-2.2L15 17l2.2-.8L18 14z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-        <h3 data-i18n="f4.t">意図転訳（AIアドバイザー）<span class='pro-tag'>Pro</span></h3>
+        <h3 data-i18n="f4.t">意図転訳（AIアドバイザー）<span class="pro-tag">Pro</span></h3>
         <p data-i18n="f4.p">伝えたいことを入力すると、場面別の自然な言い回しを AI が3〜4案提案。Apple Intelligence と Qwen（高精度）から選べ、すべて端末内で動作。</p>
       </div>
       <div class="card">
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="5" y="3" width="14" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <h3 data-i18n="f9.t">AI要約・議事録<span class='pro-tag'>Pro</span></h3>
+        <h3 data-i18n="f9.t">AI要約・議事録<span class="pro-tag">Pro</span></h3>
         <p data-i18n="f9.p">録音・動画の文字起こしを、AI が要点・決定事項・ToDo に整理。PDF / Markdown / Word で書き出せます。長い記録は分割処理し、すべて端末内で。</p>
       </div>
       <div class="card">
@@ -454,32 +442,6 @@ html[lang="zh-Hant"]{--font:"Noto Sans TC","PingFang TC","Noto Sans TC","Microso
   </div>
 </footer>
 
-<script>
-(function(){
-  var dd=document.querySelector('.lang-dd'); if(!dd) return;
-  var btn=dd.querySelector('.lang-dd-btn');
-  var close=function(){dd.setAttribute('data-open','false');btn.setAttribute('aria-expanded','false');};
-  btn.addEventListener('click',function(e){e.stopPropagation();
-    var o=dd.getAttribute('data-open')==='true';
-    dd.setAttribute('data-open',String(!o));btn.setAttribute('aria-expanded',String(!o));});
-  document.addEventListener('click',function(e){if(!dd.contains(e.target))close();});
-})();
-(function(){
-  var P={"en": "/en/", "zh": "/zh/", "zhHant": "/zh-hant/"}, K={"en": "en", "zh": "zh", "zhHant": "zh-Hant"}, T={"en": "English version available", "zh": "查看简体中文版", "zh-Hant": "查看繁體中文版"}, D={"en": "en", "zh-Hans": "zh", "zh-Hant": "zhHant"};
-  var d=null,list=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||''];
-  for(var i=0;i<list.length;i++){
-    var t=(list[i]||'').toLowerCase();
-    if(t.indexOf('ja')===0){return;}
-    if(t.indexOf('zh')===0){d=/hant|tw|hk|mo/.test(t)?D['zh-Hant']:D['zh-Hans'];break;}
-    if(t.indexOf('en')===0){d=D['en'];break;}
-  }
-  if(!d) d=D['en'];   /* 默认语言以外的其他语言（仏・独・韓など）は英語版へ */
-  if(!P[d]||!K[d]||!T[K[d]]) return;
-  var a=document.createElement('a');
-  a.className='langbar'; a.href=P[d]; a.setAttribute('hreflang',d);
-  a.textContent=T[K[d]]+' \u2192';
-  document.body.insertBefore(a,document.body.firstChild);
-})();
-</script>
+{{SCRIPT}}
 </body>
 </html>
