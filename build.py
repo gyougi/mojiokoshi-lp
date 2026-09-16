@@ -21,6 +21,12 @@ SITE = "https://mojiokoshi.glspace.co.jp"
 APP_NAME = "Mojiokoshi"
 APPSTORE = "https://apps.apple.com/app/id6778388699"
 ORG = "GLSPACE Co., Ltd."
+ORG_URL = "https://glspace.co.jp/"
+ORG_SAMEAS = ["https://apps.glspace.co.jp/"]
+# App Store 上各区的实际商店名（正本：mojiokoshi-ios/docs/app-store-listing.md §1）。
+# 与 APP_NAME 相同的名字不放进 alternateName。
+STORE_NAMES = ["Mojiokoshi 文字起こし", "Mojiokoshi: Voice to Text",
+               "Mojiokoshi 录音转文字", "Mojiokoshi 錄音轉文字"]
 SUPPORT_MAIL = "support@glspace.co.jp"
 OG_IMAGE = SITE + "/icon-256.png"
 APP_CATEGORY = "ProductivityApplication"
@@ -135,14 +141,16 @@ def head_extra(lang, d):
 
     graph = [
         {"@type": "Organization", "@id": SITE + "/#org", "name": ORG,
-         "url": SITE + "/", "email": SUPPORT_MAIL},
+         "url": ORG_URL, "sameAs": ORG_SAMEAS, "email": SUPPORT_MAIL},
         {"@type": "WebSite", "@id": url + "#website", "url": url,
          "name": APP_NAME, "inLanguage": cfg["htmllang"],
          "publisher": {"@id": SITE + "/#org"}},
         # 不写 offers / aggregateRating：站上不标金额，评分也没有真实数据，不编。
         {"@type": "SoftwareApplication", "@id": SITE + "/#app", "name": APP_NAME,
          "applicationCategory": APP_CATEGORY, "operatingSystem": APP_OS,
+         "alternateName": [n for n in dict.fromkeys(STORE_NAMES) if n != APP_NAME],
          "description": plain(d["meta.desc"]), "url": url, "installUrl": APPSTORE,
+         "sameAs": [APPSTORE],
          "image": OG_IMAGE,
          "inLanguage": [c["htmllang"] for c in LANGS.values()],
          "publisher": {"@id": SITE + "/#org"}},

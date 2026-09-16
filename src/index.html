@@ -196,6 +196,13 @@ html[lang="zh-Hant"]{--font:"Noto Sans TC","PingFang TC","Noto Sans TC","Microso
   .badge-best{position:absolute;top:-11px;right:22px;font-size:11px;font-weight:700;color:#2A1E05;
     background:linear-gradient(135deg,var(--mint),var(--mint2));padding:4px 11px;border-radius:999px}
 
+  /* faq */
+  .faq{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+  .faq .qa{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);
+    border-radius:var(--radius);padding:22px 22px}
+  .faq h3{font-size:16.5px;font-weight:700;margin-bottom:8px;text-wrap:balance;overflow-wrap:anywhere}
+  .faq p{font-size:14.5px;color:var(--mut);text-wrap:pretty;overflow-wrap:anywhere}
+
   /* final cta */
   .final{text-align:center}
   .final h2{font-size:34px;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
@@ -415,6 +422,41 @@ html[lang="zh-Hant"]{--font:"Noto Sans TC","PingFang TC","Noto Sans TC","Microso
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="plan.pro.4">.txt / .srt・マーカー一覧の書き出し</span></li>
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="plan.pro.5">AI要約・議事録（PDF/Word 書き出し）</span></li>
         </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k" data-i18n="faq.k">FAQ</div>
+      <h2 data-i18n="faq.h">よくある質問</h2>
+    </div>
+    <div class="faq">
+      <div class="qa">
+        <h3 data-i18n="faq.q1">iPhone でオフラインのまま文字起こしできるアプリは？</h3>
+        <p data-i18n="faq.a1">Mojiokoshi は、録音や動画の文字起こしを iPhone の中だけで行うアプリです。認識は端末内で動くため、機内や地下など電波のない場所でも使えます。文字起こしに通信が要るのは、初回に認識モデルをダウンロードするときだけです。</p>
+      </div>
+      <div class="qa">
+        <h3 data-i18n="faq.q2">Mojiokoshi で録った音声はどこに保存される？サーバーに送られる？</h3>
+        <p data-i18n="faq.a2">サーバーに送られることはありません。Mojiokoshi は文字起こし・翻訳・AI をすべて端末内で処理し、録音も文字起こしも iPhone 本体にのみ保存します。サーバー・解析 SDK・広告はなく、App Privacy は「データ収集なし」です。</p>
+      </div>
+      <div class="qa">
+        <h3 data-i18n="faq.q3">Mojiokoshi はサブスク？無料で使える？</h3>
+        <p data-i18n="faq.a3">サブスクではありません。Mojiokoshi は基本無料で、1回1分・1日5回まで文字起こしできます。Mojiokoshi Pro は一度の購入でずっと使える買い切りで、自動更新はありません。Pro では時間・回数が無制限になり、翻訳、AI要約・議事録、意図転訳（AIアドバイザー）、テキスト／字幕（.srt）の書き出しが使えます。</p>
+      </div>
+      <div class="qa">
+        <h3 data-i18n="faq.q4">ボイスメモなど、他のアプリにある音声や動画も文字起こしできる？</h3>
+        <p data-i18n="faq.a4">できます。そのアプリの共有ボタンから Mojiokoshi を選ぶと、そのまま取り込めます（複数まとめても構いません）。「ファイル」アプリでは、ファイルを長押しして「共有」または「このアプリで開く」からも渡せます。写真ライブラリの動画も選べます。受け取ったファイルは端末の中だけを通ります。</p>
+      </div>
+      <div class="qa">
+        <h3 data-i18n="faq.q5">Mojiokoshi の対応機種は？Apple Watch は必要？</h3>
+        <p data-i18n="faq.a5">Mojiokoshi は iOS 18 以降の iPhone で使えます。Apple Watch は必須ではなく、すべての機能が iPhone だけで使えます。watchOS 11 以降の Apple Watch があれば、録音中に時計の画面を押して印を付けたり、iPhone が手元にないときに時計だけで録音したり（1 本あたり最長 45 分）できます。</p>
+      </div>
+      <div class="qa">
+        <h3 data-i18n="faq.q6">Mojiokoshi は何語の文字起こしに対応している？</h3>
+        <p data-i18n="faq.a6">日本語・英語・中国語を含む約99言語に対応し、話している言語は自動で判定します。判定がうまくいかないときは、認識言語を日本語・英語・中国語のいずれかに固定できます。文字起こしの結果は、Mojiokoshi Pro で約20言語に翻訳できます。</p>
       </div>
     </div>
   </div>

@@ -29,7 +29,7 @@
 <link rel="alternate" hreflang="zh-Hans" href="https://mojiokoshi.glspace.co.jp/zh/" />
 <link rel="alternate" hreflang="zh-Hant" href="https://mojiokoshi.glspace.co.jp/zh-hant/" />
 <link rel="alternate" hreflang="x-default" href="https://mojiokoshi.glspace.co.jp/" />
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://mojiokoshi.glspace.co.jp/#org","name":"GLSPACE Co., Ltd.","url":"https://mojiokoshi.glspace.co.jp/","email":"support@glspace.co.jp"},{"@type":"WebSite","@id":"https://mojiokoshi.glspace.co.jp/en/#website","url":"https://mojiokoshi.glspace.co.jp/en/","name":"Mojiokoshi","inLanguage":"en","publisher":{"@id":"https://mojiokoshi.glspace.co.jp/#org"}},{"@type":"SoftwareApplication","@id":"https://mojiokoshi.glspace.co.jp/#app","name":"Mojiokoshi","applicationCategory":"ProductivityApplication","operatingSystem":"iOS","description":"Offline, on-device AI transcription. Record or import a video, then transcribe, translate, and summarize — all on your iPhone. Your audio never leaves the device.","url":"https://mojiokoshi.glspace.co.jp/en/","installUrl":"https://apps.apple.com/app/id6778388699","image":"https://mojiokoshi.glspace.co.jp/icon-256.png","inLanguage":["ja","en","zh-Hans","zh-Hant"],"publisher":{"@id":"https://mojiokoshi.glspace.co.jp/#org"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://mojiokoshi.glspace.co.jp/#org","name":"GLSPACE Co., Ltd.","url":"https://glspace.co.jp/","sameAs":["https://apps.glspace.co.jp/"],"email":"support@glspace.co.jp"},{"@type":"WebSite","@id":"https://mojiokoshi.glspace.co.jp/en/#website","url":"https://mojiokoshi.glspace.co.jp/en/","name":"Mojiokoshi","inLanguage":"en","publisher":{"@id":"https://mojiokoshi.glspace.co.jp/#org"}},{"@type":"SoftwareApplication","@id":"https://mojiokoshi.glspace.co.jp/#app","name":"Mojiokoshi","applicationCategory":"ProductivityApplication","operatingSystem":"iOS","alternateName":["Mojiokoshi 文字起こし","Mojiokoshi: Voice to Text","Mojiokoshi 录音转文字","Mojiokoshi 錄音轉文字"],"description":"Offline, on-device AI transcription. Record or import a video, then transcribe, translate, and summarize — all on your iPhone. Your audio never leaves the device.","url":"https://mojiokoshi.glspace.co.jp/en/","installUrl":"https://apps.apple.com/app/id6778388699","sameAs":["https://apps.apple.com/app/id6778388699"],"image":"https://mojiokoshi.glspace.co.jp/icon-256.png","inLanguage":["ja","en","zh-Hans","zh-Hant"],"publisher":{"@id":"https://mojiokoshi.glspace.co.jp/#org"}},{"@type":"FAQPage","@id":"https://mojiokoshi.glspace.co.jp/en/#faq","inLanguage":"en","mainEntity":[{"@type":"Question","name":"Is there an iPhone app that transcribes offline?","acceptedAnswer":{"@type":"Answer","text":"Mojiokoshi transcribes recordings and videos entirely on your iPhone. Recognition runs on-device, so it works on a plane, underground, or anywhere without signal. Transcription needs a connection only once, to download the recognition model."}},{"@type":"Question","name":"Where does Mojiokoshi store my audio? Is it sent to a server?","acceptedAnswer":{"@type":"Answer","text":"No, nothing is sent to a server. Mojiokoshi handles transcription, translation and AI entirely on-device, and both recordings and transcripts are stored only on your iPhone. There are no servers, analytics SDKs or ads, and the App Privacy label is “Data Not Collected”."}},{"@type":"Question","name":"Is Mojiokoshi a subscription? Can I use it for free?","acceptedAnswer":{"@type":"Answer","text":"It is not a subscription. Mojiokoshi is free to start, with up to 1 minute per transcription and 5 per day. Mojiokoshi Pro is a one-time purchase you keep for good, with no auto-renewal. Pro removes the time and count limits and unlocks translation, AI Summary & Minutes, the AI Advisor (Intent Phrasing), and text / subtitle (.srt) export."}},{"@type":"Question","name":"Can it transcribe audio or video from Voice Memos and other apps?","acceptedAnswer":{"@type":"Answer","text":"Yes. Tap that app’s share button and pick Mojiokoshi, and the files come straight in (several at once is fine). In the Files app you can also long-press a file and use “Share” or “Open in”. Videos in your photo library can be picked too. Anything the app receives stays inside your device."}},{"@type":"Question","name":"What devices does Mojiokoshi support? Do I need an Apple Watch?","acceptedAnswer":{"@type":"Answer","text":"Mojiokoshi runs on iPhone with iOS 18 or later. An Apple Watch is not required — every feature works with iPhone alone. With an Apple Watch on watchOS 11 or later, you can tap the watch screen to drop a marker while recording, or record on the watch by itself when your iPhone isn’t with you (up to 45 minutes per recording)."}},{"@type":"Question","name":"Which languages can Mojiokoshi transcribe?","acceptedAnswer":{"@type":"Answer","text":"About 99 languages, including Japanese, English and Chinese, with the spoken language detected automatically. If detection struggles, you can pin recognition to Japanese, English or Chinese. With Mojiokoshi Pro, transcripts can be translated into about 20 languages."}}]}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- この言語は Web フォントを読み込みません -->
@@ -207,6 +207,13 @@ html[lang="zh-Hant"]{--font:"Noto Sans TC","PingFang TC","Noto Sans TC","Microso
   .plan li svg{flex:none;color:var(--mint);margin-top:3px}
   .badge-best{position:absolute;top:-11px;right:22px;font-size:11px;font-weight:700;color:#2A1E05;
     background:linear-gradient(135deg,var(--mint),var(--mint2));padding:4px 11px;border-radius:999px}
+
+  /* faq */
+  .faq{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+  .faq .qa{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);
+    border-radius:var(--radius);padding:22px 22px}
+  .faq h3{font-size:16.5px;font-weight:700;margin-bottom:8px;text-wrap:balance;overflow-wrap:anywhere}
+  .faq p{font-size:14.5px;color:var(--mut);text-wrap:pretty;overflow-wrap:anywhere}
 
   /* final cta */
   .final{text-align:center}
@@ -427,6 +434,41 @@ html[lang="zh-Hant"]{--font:"Noto Sans TC","PingFang TC","Noto Sans TC","Microso
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="plan.pro.4">.txt / .srt and marker-list export</span></li>
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="plan.pro.5">AI Summary & Minutes (PDF/Word export)</span></li>
         </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="k" data-i18n="faq.k">FAQ</div>
+      <h2 data-i18n="faq.h">Frequently asked questions</h2>
+    </div>
+    <div class="faq">
+      <div class="qa">
+        <h3 data-i18n="faq.q1">Is there an iPhone app that transcribes offline?</h3>
+        <p data-i18n="faq.a1">Mojiokoshi transcribes recordings and videos entirely on your iPhone. Recognition runs on-device, so it works on a plane, underground, or anywhere without signal. Transcription needs a connection only once, to download the recognition model.</p>
+      </div>
+      <div class="qa">
+        <h3 data-i18n="faq.q2">Where does Mojiokoshi store my audio? Is it sent to a server?</h3>
+        <p data-i18n="faq.a2">No, nothing is sent to a server. Mojiokoshi handles transcription, translation and AI entirely on-device, and both recordings and transcripts are stored only on your iPhone. There are no servers, analytics SDKs or ads, and the App Privacy label is “Data Not Collected”.</p>
+      </div>
+      <div class="qa">
+        <h3 data-i18n="faq.q3">Is Mojiokoshi a subscription? Can I use it for free?</h3>
+        <p data-i18n="faq.a3">It is not a subscription. Mojiokoshi is free to start, with up to 1 minute per transcription and 5 per day. Mojiokoshi Pro is a one-time purchase you keep for good, with no auto-renewal. Pro removes the time and count limits and unlocks translation, AI Summary & Minutes, the AI Advisor (Intent Phrasing), and text / subtitle (.srt) export.</p>
+      </div>
+      <div class="qa">
+        <h3 data-i18n="faq.q4">Can it transcribe audio or video from Voice Memos and other apps?</h3>
+        <p data-i18n="faq.a4">Yes. Tap that app’s share button and pick Mojiokoshi, and the files come straight in (several at once is fine). In the Files app you can also long-press a file and use “Share” or “Open in”. Videos in your photo library can be picked too. Anything the app receives stays inside your device.</p>
+      </div>
+      <div class="qa">
+        <h3 data-i18n="faq.q5">What devices does Mojiokoshi support? Do I need an Apple Watch?</h3>
+        <p data-i18n="faq.a5">Mojiokoshi runs on iPhone with iOS 18 or later. An Apple Watch is not required — every feature works with iPhone alone. With an Apple Watch on watchOS 11 or later, you can tap the watch screen to drop a marker while recording, or record on the watch by itself when your iPhone isn’t with you (up to 45 minutes per recording).</p>
+      </div>
+      <div class="qa">
+        <h3 data-i18n="faq.q6">Which languages can Mojiokoshi transcribe?</h3>
+        <p data-i18n="faq.a6">About 99 languages, including Japanese, English and Chinese, with the spoken language detected automatically. If detection struggles, you can pin recognition to Japanese, English or Chinese. With Mojiokoshi Pro, transcripts can be translated into about 20 languages.</p>
       </div>
     </div>
   </div>
