@@ -323,6 +323,11 @@ html[lang="zh-Hant"]{--font:"Noto Sans TC","PingFang TC","Noto Sans TC","Microso
         <p data-i18n="f12.p">録音中に時計の画面を押すと、その場に印が付きます。印は押した少し前（初期設定 15 秒前）に付くので、聞いてから反応しても間に合います。文字盤にコンプリケーションを置いておけば、1 タップで印を付ける画面に入れます。iPhone が手元になければ、時計だけで録ることもできます（最長 45 分）。</p>
       </div>
       <div class="card">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 5h14a2 2 0 012 2v8a2 2 0 01-2 2h-7l-4 3.5V17H5a2 2 0 01-2-2V7a2 2 0 012-2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 10.5h8M8 13.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3 data-i18n="f14.t">Apple Watch で速記メモ</h3>
+        <p data-i18n="f14.p">文字盤の「速記メモ」を押し、時計が震えたらそのまま話すだけ。黙ると少しして自動で止まり、iPhone に送ります。iPhone の「メモ」欄に、話した時刻の順で文字になって並びます。Pro では口ぐせを除いて句読点を補い、見出しと分類を付け、日時があればカレンダーの下書きも開けます。</p>
+      </div>
+      <div class="card">
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M10 9l5 3-5 3V9z" fill="currentColor"/></svg></div>
         <h3 data-i18n="f2.t">動画から文字起こし</h3>
         <p data-i18n="f2.p">ライブラリの動画を選ぶだけ。音声を抽出してテキスト化します。</p>
@@ -331,11 +336,6 @@ html[lang="zh-Hant"]{--font:"Noto Sans TC","PingFang TC","Noto Sans TC","Microso
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v11M12 3L8.6 6.4M12 3l3.4 3.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 10H6a2 2 0 00-2 2v7a2 2 0 002 2h12a2 2 0 002-2v-7a2 2 0 00-2-2h-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
         <h3 data-i18n="f13.t">他のアプリから直接わたす</h3>
         <p data-i18n="f13.p">ボイスメモやメッセージ、クラウドのアプリから、共有パネルで Mojiokoshi を選ぶだけ。いったん保存して開き直す手間はなく、複数まとめてもわたせます。「ファイル」アプリの m4a / mp3 / wav を直接選ぶこともできます（写真ライブラリには音声を入れられないため、手持ちの録音はこちらから）。受け取ったファイルは端末の中だけを通ります。</p>
-      </div>
-      <div class="card">
-        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 8h8M16 8h4M4 16h4M12 16h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="14" cy="8" r="2.3" stroke="currentColor" stroke-width="1.8"/><circle cx="10" cy="16" r="2.3" stroke="currentColor" stroke-width="1.8"/></svg></div>
-        <h3 data-i18n="f7.t">モデルを選べる</h3>
-        <p data-i18n="f7.p">用途に合わせて Tiny / Base / Small / Large v3 を切り替え。精度と速度のバランスを選べ、各画面の上部からすぐ変更できます。</p>
       </div>
       <div class="card">
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 6h7M7 4v2c0 4-1.5 7-4 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M5 11c1.5 2.5 3.5 4 6 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M13 20l4-9 4 9M14.5 17h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -364,8 +364,8 @@ html[lang="zh-Hant"]{--font:"Noto Sans TC","PingFang TC","Noto Sans TC","Microso
       </div>
       <div class="card">
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 12h17M12 3.5c2.5 2.6 2.5 14.4 0 17M12 3.5c-2.5 2.6-2.5 14.4 0 17" stroke="currentColor" stroke-width="1.5"/></svg></div>
-        <h3 data-i18n="f6.t">約99言語に対応</h3>
-        <p data-i18n="f6.p">日本語・英語・中国語ほか約99言語に対応。話す言語は自動でも判定します。</p>
+        <h3 data-i18n="f6.t">約99言語・モデルを選べる</h3>
+        <p data-i18n="f6.p">日本語・英語・中国語ほか約99言語に対応し、話す言語は自動でも判定します。認識モデルは Tiny / Base / Small / Large v3 から、精度と速度のバランスで選べます。</p>
       </div>
       <div class="card">
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 100 18c1 0 1.6-.8 1.6-1.7 0-.4-.2-.8-.4-1.1-.2-.3-.4-.7-.4-1.1 0-.9.8-1.6 1.7-1.6H17a4 4 0 004-4c0-4.4-4-8.5-9-8.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="7.5" cy="12" r="1.1" fill="currentColor"/><circle cx="12" cy="8" r="1.1" fill="currentColor"/><circle cx="16" cy="12" r="1.1" fill="currentColor"/></svg></div>
@@ -452,11 +452,15 @@ html[lang="zh-Hant"]{--font:"Noto Sans TC","PingFang TC","Noto Sans TC","Microso
       </div>
       <div class="qa">
         <h3 data-i18n="faq.q5">Mojiokoshi の対応機種は？Apple Watch は必要？</h3>
-        <p data-i18n="faq.a5">Mojiokoshi は iOS 18 以降の iPhone で使えます。Apple Watch は必須ではなく、すべての機能が iPhone だけで使えます。watchOS 11 以降の Apple Watch があれば、録音中に時計の画面を押して印を付けたり、iPhone が手元にないときに時計だけで録音したり（1 本あたり最長 45 分）できます。</p>
+        <p data-i18n="faq.a5">Mojiokoshi は iOS 18 以降の iPhone で使えます。Apple Watch は必須ではなく、速記メモ以外の機能はすべて iPhone だけで使えます。watchOS 11 以降の Apple Watch があれば、録音中に時計の画面を押して印を付けたり、iPhone が手元にないときに時計だけで録音したり（1 本あたり最長 45 分）、文字盤から話すだけで速記メモを残したりできます。</p>
       </div>
       <div class="qa">
         <h3 data-i18n="faq.q6">Mojiokoshi は何語の文字起こしに対応している？</h3>
         <p data-i18n="faq.a6">日本語・英語・中国語を含む約99言語に対応し、話している言語は自動で判定します。判定がうまくいかないときは、認識言語を日本語・英語・中国語のいずれかに固定できます。文字起こしの結果は、Mojiokoshi Pro で約20言語に翻訳できます。</p>
+      </div>
+      <div class="qa">
+        <h3 data-i18n="faq.q7">Apple Watch の速記メモは無料で使える？</h3>
+        <p data-i18n="faq.a7">使えます。速記メモは無料版の 1 日 5 回に数えず、1 件あたり最長 1 分まで録れます。文字起こしは iPhone の中で行い、アプリを開いていない間に届いた分は、次に開いたときにまとめて文字にします。Mojiokoshi Pro では 1 件最長 3 分になり、見出し・分類・句読点の整理、カレンダーの下書き、1 日分の書き出しとまとめが使えます。整理には Apple Intelligence、またはアプリ内でダウンロードする AI モデルが必要です。</p>
       </div>
     </div>
   </div>
