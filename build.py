@@ -44,7 +44,7 @@ HANDWRITTEN_PAGES = (
 
 OG_IMAGE = SITE + "/icon-256.png"
 APP_CATEGORY = "ProductivityApplication"
-APP_OS = "iOS"
+APP_OS = "iOS, iPadOS, watchOS"
 
 # 繁体的内部码是历史遗留的 zhHant（不是 zh-Hant），字典键沿用它，别改
 LANGS = {
